@@ -5,14 +5,11 @@ import java.io.FileReader;
 public class App {
     public static void main(String[] args) throws Exception {
         File f;
-        FileReader fr;
-        BufferedReader br;
         String linea = "";
 
         f = new File("fichero.txt");
-        try{
-            fr = new FileReader(f);
-            br = new BufferedReader(fr);
+        try(FileReader fr = new FileReader(f); BufferedReader br = new BufferedReader(fr)){
+
             while((linea = br.readLine()) != null){
                 String[] triangulo = linea.split(" ");
                 creaTriangulo(triangulo);//crea e imprime el triángulo
@@ -30,7 +27,7 @@ public class App {
             lineaTriangulo = "";
 
             for (int y=1; y<largo-x+1; y++){//inserta los sitios en blanco a la izquierda
-                lineaTriangulo += "-";
+                lineaTriangulo += " ";
             }
 
             for (int y=1; y<=x+(x-1); y++){//inserta las letras
@@ -38,7 +35,7 @@ public class App {
             }
 
             for (int y=1; y<largo-x+1; y++){//inserta los sitios en blanco a la derecha
-                lineaTriangulo += "-";
+                lineaTriangulo += " ";
             } 
 
             System.out.println(lineaTriangulo);
